@@ -1,7 +1,13 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+
 const handler = NextAuth({
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
@@ -40,6 +46,7 @@ const handler = NextAuth({
       },
     }),
   ],
+  
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };
