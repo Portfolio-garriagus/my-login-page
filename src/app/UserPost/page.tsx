@@ -1,7 +1,7 @@
 import React from "react";
 
 const UserPostPage = () => {
-  return <div>Only Authenticated user should access to this page</div>;
+  return <div>src/app/UserPost</div>;
 };
 
 export default UserPostPage;
