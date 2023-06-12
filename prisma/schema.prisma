@@ -2,17 +2,28 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+
+model Posts {
+  id        String     @default(cuid()) @id
+  title     String
+  published Boolean @default(false)
+  author    User?   @relation(fields: [authorId], references: [id])
+  authorId  String?
+  createdAt DateTime  @default(now())
 }
 
 model Account {
   id                 String    @id @default(cuid())
-  userId             String
+  userId             String  
+  type              String
   providerType       String
   providerId         String
   providerAccountId  String
@@ -46,7 +57,8 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
-  sessions      Session[]
+  sessions      Session[]  
+  posts         Posts[]
 }
 
 model VerificationRequest {
