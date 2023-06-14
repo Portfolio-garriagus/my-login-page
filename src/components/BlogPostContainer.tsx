@@ -10,7 +10,7 @@ const BlogPostContainer = ({ blogPosts }: Props) => {
   return (
     <div className="m-4 grid lg:grid-cols-3 grid-cols-1 gap-8 justify-center  ">
       {blogPosts.map((post) => (
-        <Card key={post.slug} blogPost={post} />
+        <Card key={post.id} blogPost={post} />
       ))}
     </div>
   );

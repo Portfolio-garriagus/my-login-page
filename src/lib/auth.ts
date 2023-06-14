@@ -13,17 +13,16 @@ const prisma = new PrismaClient();
 
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
 
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
-      // ** ...add more providers here
-      
+      // ** ...add more providers here      
   ],  
-  secret: process.env.NEXTAUTH_SECRET,  
+  adapter: PrismaAdapter(prisma),
+  secret: process.env.SECRET,
     // ** Please refer to https://next-auth.js.org/configuration/options#session for more `session` options
     session: {
       /*
