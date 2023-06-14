@@ -8,80 +8,64 @@ datasource db {
 }
 
 model Account {
-  id                 Int       @id @default(autoincrement())
-  compoundId         String    @unique @map("compound_id")
-  userId             Int       @map("user_id")
-  providerType       String    @map("provider_type")
-  providerId         String    @map("provider_id")
-  providerAccountId  String    @map("provider_account_id")
-  refreshToken       String?   @map("refresh_token")
-  accessToken        String?   @map("access_token")
-  accessTokenExpires DateTime? @map("access_token_expires")
-  createdAt          DateTime  @default(now()) @map("created_at")
-  updatedAt          DateTime  @default(now()) @map("updated_at")
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
 
-  @@index([providerAccountId], map: "providerAccountId")
-  @@index([providerId], map: "providerId")
-  @@index([userId], map: "userId")
-  @@map("accounts")
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           Int      @id @default(autoincrement())
-  userId       Int      @map("user_id")
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
   expires      DateTime
-  sessionToken String   @unique @map("session_token")
-  accessToken  String   @unique @map("access_token")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @default(now()) @map("updated_at")
-
-  @@map("sessions")
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
+  id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  emailVerified DateTime?
   image         String?
-  roles         Role      @default(User)
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @default(now()) @map("updated_at")
-  posts         Post[]
-
-  @@map("users")
+ role      Role     @default(USER)
+  accounts      Account[]
+  sessions      Session[]
+  posts     Post[]
 }
 
-model VerificationRequest {
-  id         Int      @id @default(autoincrement())
+model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @default(now()) @map("updated_at")
 
-  @@map("verification_requests")
+  @@unique([identifier, token])
 }
 
 model Post {
-  id          Int       @id @default(autoincrement())
-  title       String
-  slug        String
-  content     String
-  description String
-  imageUrl    String
-  bannerUrl   String
-  published   Boolean   @default(false)
-  updatedAt   DateTime?
-  authorId    Int
-  author      User      @relation(fields: [authorId], references: [id])
-
-  
-  @@map("posts")
+  id        String     @default(cuid()) @id
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User?   @relation(fields: [authorId], references: [id])
+  authorId  String?
 }
 
+
 enum Role {
-  User
+  USER
   ADMIN
   SUPERADMIN
 }
