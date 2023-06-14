@@ -15,13 +15,13 @@ const Card = ({ blogPost }: Props) => {
         className={"rounded-md drop-shadow transition group-hover:scale-105"}
         width={400}
         height={300}
-  />*/}
-      <h6 className="text-lg text-slate-800">{blogPost.title}</h6>
+  />
+      <h6 className="text-lg text-slate-800">{blogPost.description}</h6>
       <p className="text-slate-500 text-center">{blogPost.description}</p>
       <Link href={`/post/${blogPost.slug}`} className={"text-slate-500 hover:text-sky-500 flex"}>
         <span>See More</span>
         
-      </Link>
+      </Link>*/}
     </div>
   );
 };
