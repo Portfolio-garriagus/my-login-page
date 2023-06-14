@@ -8,11 +8,17 @@ async function main() {
     update: {},
     create: {
       name: "Admin",
-      email: "admin@admin.com",
+      email: "admin@admin.com",    
+      posts: {
+        create: {
+          title: "Check out Prisma with Next.js",
+          content: "https://www.prisma.io/nextjs",
+          published: true,
+          
+        },
+      },
     },
   });
-
-  console.log({ user });
 }
 
 main()
