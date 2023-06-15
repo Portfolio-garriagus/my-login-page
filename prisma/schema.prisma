@@ -22,7 +22,8 @@ model Account {
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])  
+  @@map("accounts")
 }
 
 model Session {
@@ -31,6 +32,7 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("sessions")
 }
 
 model User {
@@ -43,6 +45,7 @@ model User {
   accounts      Account[]
   posts         Post[]
   sessions      Session[]
+  @@map("users")
 }
 
 model VerificationToken {
@@ -51,6 +54,7 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verificationtokens")
 }
 
 model Post {
@@ -65,6 +69,8 @@ model Post {
   viewCount   Int      @default(0)
   authorId    String?
   author      User?    @relation(fields: [authorId], references: [id])
+
+   @@map("posts")
 }
 
 enum Role {
