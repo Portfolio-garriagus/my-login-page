@@ -13,8 +13,7 @@ async function main() {
         create: {
           title: "Check out Prisma with Next.js",
           content: "https://www.prisma.io/nextjs",
-          published: true,
-          
+          published: true,          
         },
       },
     },

@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import BlogPostContainer from "@/components/BlogPostContainer";
-import { getAllPosts } from "@/lib/getData";
+import { getPublishedPosts } from "@/lib/getData";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 
 export default async function Home() {
-  const posts = await getAllPosts();
+  const posts = await getPublishedPosts();
   let users = await prisma.user.findMany();
   return (
     <main>
