@@ -55,6 +55,8 @@ CREATE TABLE "Post" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "title" TEXT NOT NULL,
     "content" TEXT,
+    "imageUrl" TEXT,
+    "description" TEXT,
     "published" BOOLEAN NOT NULL DEFAULT false,
     "viewCount" INTEGER NOT NULL DEFAULT 0,
     "authorId" TEXT,

@@ -8,12 +8,15 @@ async function main() {
     update: {},
     create: {
       name: "Admin",
-      email: "admin@admin.com",    
+      email: "admin@admin.com",  
+      role: "USER",  
       posts: {
         create: {
-          title: "Check out Prisma with Next.js",
-          content: "https://www.prisma.io/nextjs",
-          published: true,          
+          title: "Primer Posteo de Java",
+          content: "Mis proyectos con Java & Spring Boot",
+          imageUrl: "/java", 
+          description : "java",
+          published: true,  
         },
       },
     },
