@@ -1,9 +1,11 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 
 export default async function Profile() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
+  let users = await prisma.user.findMany();
 
   return (
     <>
@@ -11,10 +13,10 @@ export default async function Profile() {
         <div className="max-w-4xl mx-auto bg-ct-dark-100 rounded-md h-[20rem] flex justify-center items-center">
           <div>
             <p className="mb-3 text-5xl text-center font-semibold">
-              Profile Page
+              Perfil de Usuario
             </p>
             {!user ? (
-              <p>Loading...</p>
+              <p>Por favor, inicie sesión para continuar</p>
             ) : (
               <div className="flex items-center gap-8">
                 <div>

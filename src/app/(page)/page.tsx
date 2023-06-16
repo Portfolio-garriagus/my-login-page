@@ -16,14 +16,9 @@ export default async function Home() {
       </div>    
       {posts.map((post) => (
           <div
-            key={post.id}
+            key={post.title}
             style={{ border: "1px solid #ccc", textAlign: "center" }}
-          >
-            <img
-              src={`https://robohash.org/${post.authorId}?set=set2&size=180x180`}
-              alt='asd'
-              style={{ height: 180, width: 180 }}
-            />
+          >           
             <h3>{post.content}</h3>
           </div>
         ))}

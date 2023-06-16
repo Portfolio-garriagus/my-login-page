@@ -19,7 +19,7 @@ const Card = ({ blogPost }: Props) => {
   />
       <h6 className="text-lg text-slate-800">{blogPost.title}</h6>
       <p className="text-slate-500 text-center">{blogPost.authorId}</p>
-      <Link href={`/post/${blogPost.id}`} className={"text-slate-500 hover:text-sky-500 flex"}>
+      <Link href={`/post/${blogPost.slug}`} className={"text-slate-500 hover:text-sky-500 flex"}>
         <span>See More</span>        
       </Link>
     </div>

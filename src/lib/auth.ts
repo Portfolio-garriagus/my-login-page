@@ -1,6 +1,10 @@
 import { compare } from "bcryptjs";
 import NextAuth from "next-auth";
-import type { NextAuthOptions } from "next-auth";
+import {
+  getServerSession,
+  type NextAuthOptions,
+  type DefaultSession,
+} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -8,8 +12,7 @@ import GoogleProvider from "next-auth/providers/google";
 import Auth0Provider from "next-auth/providers/auth0";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient();
+import { prisma } from "./prisma";
 
 
 export const authOptions: NextAuthOptions = {
@@ -33,28 +36,20 @@ export const authOptions: NextAuthOptions = {
        * When using `database`, the session cookie will only contain a `sessionToken` value,
        * which is used to look up the session in the database.
        */
-      strategy: 'jwt',
-  
+      strategy: 'jwt',  
       // ** Seconds - How long until an idle session expires and is no longer valid
-      maxAge: 30 * 24 * 60 * 60 // ** 30 days
+      maxAge: 12// ** 30 days
     },
     callbacks: {
-      /*
-       * While using `jwt` as a strategy, `jwt()` callback will be called before
-       * the `session()` callback. So we have to add custom parameters in `token`
-       * via `jwt()` callback to make them accessible in the `session()` callback
-       */
       async jwt({ token, user }) {
-        if (user) {
-          /*
-           * For adding custom parameters to user in session, we first need to add those parameters
-           * in token which then will be available in the `session()` callback
-           */
-          token.role = "member";
-          return token;
-        }
+        return { ...token, ...user };
+      },
   
-        return token
-      },  
-  },
-};
+      async session({ session, token }) {
+        session.user = token as any;
+        return session;
+      },
+    },
+  }
+  
+

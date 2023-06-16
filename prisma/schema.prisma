@@ -62,6 +62,7 @@ model Post {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   title       String
+  slug        String @unique
   content     String?
   imageUrl    String?
   description String?
@@ -78,3 +79,4 @@ enum Role {
   ADMIN
   SUPERADMIN
 }
+

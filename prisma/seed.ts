@@ -1,3 +1,4 @@
+
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -14,6 +15,7 @@ async function main() {
         create: {
           title: "Primer Posteo de Java",
           content: "Mis proyectos con Java & Spring Boot",
+          slug: "java",
           imageUrl: "/java", 
           description : "java",
           published: true,  
@@ -30,3 +32,5 @@ main()
     await prisma.$disconnect();
     process.exit();
   });
+
+

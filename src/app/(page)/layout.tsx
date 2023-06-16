@@ -8,10 +8,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.dummyblog.com"),
+  metadataBase: new URL("https://www.garriagus.duckdnsorg"),
   title: {
     default: "garriagus Blog",
-    template: `%s | Dummy blog`,
+    template: `%s | garriagus blog`,
   },
   description: "This is the description of my blog",
   verification: {
