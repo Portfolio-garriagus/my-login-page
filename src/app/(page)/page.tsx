@@ -4,6 +4,7 @@ import { getPublishedPosts } from "@/lib/getData";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 
+
 export default async function Home() {
   const posts = await getPublishedPosts();
   let users = await prisma.user.findMany();
