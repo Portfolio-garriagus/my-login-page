@@ -2,7 +2,15 @@ import { prisma }  from "./prisma";
 
 // POSTS
 export async function getAllPosts() {
-  return await prisma.post.findMany();
+  const data = await prisma.post.findMany({
+    include: {
+      author: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return data;
 }
 
 export async function getPublishedPosts() {
@@ -15,5 +23,17 @@ export async function getPublishedPosts() {
     },
   }); 
 };
+
+export async function getPostFromSlug(slug: string) {
+  return await prisma.post.findMany({
+    where:{ slug: String(slug) },
+    include: {
+      author: {
+        select: { name: true },
+      },
+    },
+  })
+};
+
 
 // USERS

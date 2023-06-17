@@ -1,44 +1,45 @@
+import BlogPostContainer from "@/components/BlogPostContainer";
 import { Metadata } from "next";
 import React from "react";
+import { getPostFromSlug } from "@/lib/getData";
+import { Post } from '@prisma/client';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { getAllPosts, getPublishedPosts } from "@/lib/getData";
-
-
-
-interface PostProps {
+interface postByIdProps {
   params: {
     slug: string[]
+    title: string[]
+    content: string[]
   }
 }
 
-async function getPostFromParams(params: PostProps["params"]) {
-  const posts = await getAllPosts();
-  const slug = params?.slug?.join("/")
-  const post = posts.find((post) => post.slug === slug)
-  if (!post) {
-    null
-  }
-
-  return post
+export default async function PostDetail({params}: postByIdProps) {  
+  const slug = getStaticProps(params) //gets post's ID
+   const posts = await getPostFromSlug("java");
+  console.log("Post here,", posts)
+  return (
+    <>
+      <div>
+      <BlogPostContainer blogPosts={posts} />  
+      </div>
+    </>
+  );
 }
 
-export async function generateMetadata({
-  params,
-}: PostProps): Promise<Metadata> {
-  const post = await getPostFromParams(params)
-
-  if (!post) {
-    return {}
+export const getStaticProps = async({params}: any)=>{
+  const slug = params.slugs[0] //gets post's ID
+  const post = getPostFromSlug(slug)
+  return {
+    post
   }
+}
+
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 
   return {
-    title: post.title,
-    description: post.description,
+      paths: [], //indicates that no page needs be created at build time
+      fallback: 'blocking' //indicates the type of fallback
   }
 }
 
-const AboutPage = () => {
-  return <div className="p-10">Este es mi blog.</div>;
-};
 
-export default AboutPage;

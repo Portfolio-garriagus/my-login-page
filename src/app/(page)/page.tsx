@@ -7,6 +7,7 @@ import { prisma } from "@/lib/prisma";
 
 export default async function Home() {
   const posts = await getPublishedPosts();
+  
   return (
     <main>
       <div className="flex justify-center">
