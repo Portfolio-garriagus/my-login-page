@@ -1,4 +1,4 @@
-import AppBar from "@/components/AppBar";
+import NavBar from "@/components/NavBar";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Providers>
-          <AppBar />
+          <NavBar />
           {children}
         </Providers>
       </body>

@@ -43,7 +43,7 @@ export const authOptions: NextAuthOptions = {
        */
       strategy: 'jwt',  
       // ** Seconds - How long until an idle session expires and is no longer valid
-      maxAge: 12// ** 30 days
+      maxAge: 1200// ** 30 days
     },
     callbacks: {
       async jwt({ token, user }) {
