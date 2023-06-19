@@ -35,7 +35,6 @@ CREATE TABLE "users" (
     "name" TEXT,
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
-    "password" TEXT,
     "image" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
 
