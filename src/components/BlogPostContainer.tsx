@@ -11,11 +11,11 @@ const BlogPostContainer = ({ blogPosts }: Props) => {
     <div className="mt-10 md:flex justify-center">
       <div className="max-w-full flex-row justify-center mb-8 md:mr-2">
 
-        <article className="text-center bg-white shadow-md mb-4">
+        <div className="text-center bg-white shadow-md mb-4">
           {blogPosts.map((post) => (
             <Card key={post.id} blogPost={post} />
           ))}     
-        </article>      
+        </div>      
       </div>
 
       <section>

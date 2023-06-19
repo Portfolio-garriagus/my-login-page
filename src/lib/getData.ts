@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import { prisma }  from "./prisma";
 // POSTS
 export async function getAllPosts() {
@@ -35,3 +36,5 @@ export async function getPostFromSlug(slug: string) {
 };
 
 // USERS
+// index.tsx
+

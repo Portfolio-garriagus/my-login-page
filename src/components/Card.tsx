@@ -18,7 +18,7 @@ const Card = ({ blogPost }: Props) => {
         height={300}
       />
       <h6 className="text-lg text-slate-800 text-2xl font-bold">{blogPost.title}</h6>
-      <p className="text-slate-500 text-center">{blogPost.content}</p>
+      <h1 className="text-slate-500 text-center">{blogPost.content}</h1>
       <h2 className="text-lg text-slate-800 text-2xl font-bold">#{blogPost.description}</h2>
       <h2 className="text-lg text-slate-800 text-2xl font-bold">#{blogPost.description}</h2>
       <div className="footer-article flex w-full justify-center items-center">
