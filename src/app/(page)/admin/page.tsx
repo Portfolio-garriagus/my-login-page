@@ -6,8 +6,10 @@ export default async function Profile() {
   const session = await getServerSession(authOptions);
   const user = session?.user;
   let users = await prisma.user.findMany();
-
-  return (
+  console.log("esta es la sesion: " + session?.user?.email),
+  console.log("esta es la user: " + user?.image),
+  console.log("esta es la users: " + users)
+  return (    
     <>
       <section className="bg-ct-blue-600  min-h-screen pt-20">
         <div className="max-w-4xl mx-auto bg-ct-dark-100 rounded-md h-[20rem] flex justify-center items-center">
@@ -29,6 +31,7 @@ export default async function Profile() {
                 <div className="mt-8">
                   <p className="mb-3">Name: {user.name}</p>
                   <p className="mb-3">Email: {user.email}</p>
+                  <p className="mb-3">Email: {user.role}</p>
                 </div>
               </div>
             )}

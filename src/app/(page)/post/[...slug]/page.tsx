@@ -1,43 +1,62 @@
 import BlogPostContainer from "@/components/BlogPostContainer";
-import { Metadata } from "next";
 import React from "react";
 import { getPostFromSlug } from "@/lib/getData";
-import { Post } from '@prisma/client';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
 
-interface postByIdProps {
+interface PostProps {
   params: {
     slug: string[]
     title: string[]
-    content: string[]
   }
 }
 
-export default async function PostDetail({ params }: postByIdProps) {
-  const slug = getStaticProps(params) //gets post's ID
-  const posts = await getPostFromSlug("java");
-  console.log("Post here,", posts)
-  return (
-    <>
-      <div>
-        <BlogPostContainer blogPosts={posts} />
-      </div>
-    </>
-  );
-}
-
-export const getStaticProps = async ({ params }: any) => {
-  const slug = params.slugs[0] //gets post's slug
+async function getPostFromParams(params: PostProps["params"]) {
+  const slug = params?.slug?.join("/")
   const post = getPostFromSlug(slug)
-  return {
-    post
+  if (!post) {
+    null
   }
+  return post
 }
 
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-
+export async function generateMetadata({
+  params,
+}: PostProps): Promise<Metadata> {
+  const slug = params?.slug?.join("/")
+  const post = getPostFromSlug(slug)
+  console.log(post)
+  if (!post) {
+    return {}
+  }
   return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking' //indicates the type of fallback
+    title: slug,
+    description: slug,
   }
 }
+{/*
+export async function generateStaticParams(): Promise<PostProps["params"][]> {
+  const post = getPostFromSlug(params)
+  return post((post) => ({
+    slug: post.slugAsParams.split("/"),
+  }))
+}
+*/}
+
+export default async function PostPage({ params }: PostProps) {
+  const post = await getPostFromSlug("java");
+  if (!post) {
+    notFound()
+  }
+  return (
+    <article className="py-6 prose dark:prose-invert">    
+      {post && (
+        <p className="text-xl mt-0 text-slate-700 dark:text-slate-200">
+          <BlogPostContainer blogPosts={post} />
+        </p>
+      )}
+      <hr className="my-4" />
+    </article>
+  )
+}
+

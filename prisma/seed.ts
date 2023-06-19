@@ -11,6 +11,7 @@ async function main() {
       name: "Admin",
       email: "admin@admin.com",  
       role: "USER",  
+      password: "admin",
       posts: {
         create: {
           title: "Primer Posteo de Java",

@@ -35,6 +35,7 @@ CREATE TABLE "users" (
     "name" TEXT,
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
+    "password" TEXT,
     "image" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
 
@@ -51,8 +52,8 @@ CREATE TABLE "verificationtokens" (
 -- CreateTable
 CREATE TABLE "posts" (
     "id" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMPTZ(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMPTZ(3) NOT NULL,
     "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "content" TEXT,
