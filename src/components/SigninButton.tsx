@@ -4,6 +4,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 //import { getServerSession } from "next-auth/next";
 import React from "react";
+import Link from "next/link";
 
 const SigninButton = () => {
   const { data: session } = useSession();
@@ -20,9 +21,14 @@ const SigninButton = () => {
     );
   }
   return (
-    <button onClick={() => signIn()} className="text-green-600 ml-auto">
-      Sign In
-    </button>
+    <li>
+      <button onClick={() => signIn()} className="text-green-600 ml-auto">
+        Sign In
+      </button>
+      <Link href="/register" style={{ marginRight: 10 }}>
+        Register
+      </Link>
+    </li>
   );
 };
 

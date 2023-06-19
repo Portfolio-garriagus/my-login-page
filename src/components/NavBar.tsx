@@ -21,6 +21,7 @@ const NavBar = () => {
             <Link className="text-slate-500 hover:text-sky-500 transition-colors flex items-center gap-2" href={"/about"}>
               About
             </Link>
+
           </li>
         </ul>
         <SigninButton />

@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 // import Twitch from "../../../providers/twitch";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { prisma } from "./prisma";
+import { compare } from "bcryptjs";
 
 
 export const authOptions: NextAuthOptions = {
@@ -20,43 +21,36 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
-      name: "Credentials",
-      // `credentials` is used to generate a form on the sign in page.
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
+      name: "Sign in",
       credentials: {
-        username: {
-          label: "Username",
-          type: "text",
-          placeholder: "jsmith",
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "example@example.com",
         },
-        password: {
-          label: "Password",
-          type: "password",
-        },
+        password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        const { username, password } = credentials as any;
-        const res = await fetch("http://localhost:8000/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) {
+          return null;
+        }
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email,
           },
-          body: JSON.stringify({
-            username,
-            password,
-          }),
         });
 
-        const user = await res.json();
+        if (!user || !(await compare(credentials.password, user.password))) {
+          return null;
+        }
 
-        console.log({ user });
-
-        if (res.ok && user) {
-          return user;
-        } else return null;
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          randomKey: "Hey cool",
+        };
       },
     }),
     // ** ...add more providers here      
@@ -81,7 +75,6 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       return { ...token, ...user };
     },
-
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
       session.user = token;
