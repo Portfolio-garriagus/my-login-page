@@ -1,5 +1,4 @@
-import { GetStaticProps } from "next";
-import { prisma }  from "./prisma";
+import { prisma } from "./prisma";
 // POSTS
 export async function getAllPosts() {
   const data = await prisma.post.findMany({
@@ -21,12 +20,12 @@ export async function getPublishedPosts() {
         select: { name: true },
       },
     },
-  }); 
+  });
 };
 
-export async function getPostFromSlug(slug: string) {
+export async function getPostFromId(id: string) {
   return await prisma.post.findMany({
-    where:{ slug: String(slug) },
+    where: { id: id },
     include: {
       author: {
         select: { name: true },
@@ -37,4 +36,18 @@ export async function getPostFromSlug(slug: string) {
 
 // USERS
 // index.tsx
-
+export async function updatePost(id: string, title: any, content: any, slug: any, imageUrl: any, description: any
+  ) {
+  return await prisma.post.upsert({
+    where: { id: id },
+    update: {},
+    create: {
+      title: title,
+      content: content,
+      slug: slug,
+      imageUrl: imageUrl, 
+      description : description,
+      published: true,         
+      },
+  })
+};

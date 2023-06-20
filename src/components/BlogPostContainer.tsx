@@ -1,6 +1,6 @@
 import { Post } from "@prisma/client";
 import React from "react";
-import Card from "./Card";
+import Card from "./Cardos";
 
 export interface Props {
   blogPosts: Post[];
@@ -13,7 +13,7 @@ const BlogPostContainer = ({ blogPosts }: Props) => {
 
         <div className="text-center bg-white shadow-md mb-4">
           {blogPosts.map((post) => (
-            <Card key={post.id} blogPost={post} />
+            <Card key={post.id} item={post} />
           ))}     
         </div>      
       </div>

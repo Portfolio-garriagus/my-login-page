@@ -1,6 +1,6 @@
 import BlogPostContainer from "@/components/BlogPostContainer";
 import React from "react";
-import { getPostFromSlug } from "@/lib/getData";
+import { getPostFromId } from "@/lib/getData";
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Image from "next/image";
@@ -9,13 +9,14 @@ import { TfiCommentAlt, TfiHeart, TfiEye } from "react-icons/tfi";
 
 interface PostProps {
   params: {
+    id: string[]
     slug: string[]
     title: string[]
   }
 }
 async function getPostFromParams(params: PostProps["params"]) {
-  const slug = params?.slug?.join("/")
-  const post = getPostFromSlug(slug)
+  const id = params?.id?.join("/")
+  const post = getPostFromId(id)
   if (!post) {
     null
   }
