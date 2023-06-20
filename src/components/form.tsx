@@ -17,23 +17,8 @@ interface FormData {
     blogPost: Post;
 }
 
-/*async function createPost(blogPost: FormData["blogPost"]) {
-    const id = blogPost.id
-    const title = blogPost.title
-    const content = blogPost.content
-    const slug = blogPost.slug
-    const imageUrl = blogPost.imageUrl
-    const description = blogPost.description
-    const post = updatePost(id, title, content, slug, imageUrl, description)
-    if (!post) {
-      null
-    }
-    return post
-  }*/
-
 // Load notes from getServerSideProps server side rendering
-const Form = ({ blogPost }: FormData) => {
-
+const Form: React.FC = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
