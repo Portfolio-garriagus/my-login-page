@@ -18,7 +18,9 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const json = await request.json();
-
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+    console.log("esto es datajson: " + json)
     const post = await prisma.post.create({
       data: json,
     });
