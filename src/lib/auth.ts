@@ -3,7 +3,8 @@ import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 // import Twitch from "../../../providers/twitch";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient , User } from "@prisma/client";
+
 
 const prisma = new PrismaClient()
 
@@ -34,7 +35,6 @@ export const authOptions: NextAuthOptions = {
           token.accessToken = account.access_token
           token.provider = account.provider
       }
-      if(user) token.role = user.role
       return token
     },
     async session({ session, token, user }) {

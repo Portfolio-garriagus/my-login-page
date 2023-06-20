@@ -10,7 +10,7 @@ export default async function Dashboard() {
   if (!user) {
     return <h1>Por favor, inicie sesión para continuar</h1>;
   }
-  if (user?.role === "ADMIN") {
+  if (session.user?.email === "ADMIN") {
     <h1 className="mb-3 text-5xl text-center font-semibold">
       Perfil de ADMINISTRADOR
     </h1>
@@ -32,7 +32,7 @@ export default async function Dashboard() {
               </div>
               <div className="mt-8">
                 <h1 className="mb-3">Name: {user.name}</h1>
-                <h1 className="mb-3">Email: {user.role}</h1>
+                <h1 className="mb-3">Email: {user.email}</h1>
               </div>
             </div>            
           </div>
