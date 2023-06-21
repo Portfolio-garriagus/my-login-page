@@ -22,8 +22,10 @@ export const authOptions: NextAuthOptions = {
     }),
     // ** ...add more providers here      
   ],
+
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
+
   // ** Please refer to https://next-auth.js.org/configuration/options#session for more `session` options
   session: {
     strategy: 'jwt',
@@ -33,13 +35,14 @@ export const authOptions: NextAuthOptions = {
     async jwt({token, user, account, profile}) {
       if (account) {
           token.accessToken = account.access_token
-          token.provider = account.provider
+          token.provider = account.provider          
       }
       return token
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      session.user = token;
+      
+      session.user = token;      
       return session;
     },    
   },

@@ -22,14 +22,13 @@ export async function POST(request: Request) {
     const post = await prisma.post.create({
       data: json,
     });
-
     return new NextResponse(JSON.stringify(post), { 
      status: 201, 
      headers: { "Content-Type": "application/json" },
     });
   } catch (error: any) {
     if (error.code === "P2002") {
-      return new NextResponse("Post with email already exists", {
+      return new NextResponse("Post with thie title already exists", {
         status: 409,
       });
     }
