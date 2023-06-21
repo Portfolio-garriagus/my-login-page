@@ -6,6 +6,7 @@ import  Providers  from "@/components/Providers";
 import { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModeToggle } from "@/components/mode-toggle"
+import  SideBar  from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
