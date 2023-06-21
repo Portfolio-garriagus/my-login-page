@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import { Metadata } from "next";
+import { ThemeProvider } from "@/components/theme-provider"
+import { ModeToggle } from "@/components/mode-toggle"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,16 +21,19 @@ export const metadata: Metadata = {
     google: "google-site-verification=878787878",
   },
 };
+interface RootLayoutProps {
+  children: React.ReactNode
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
         <Providers>
-          <NavBar />
-          {children}
-          <Footer />
-        </Providers>
+            <NavBar />
+            {children}
+            <Footer />
+        </Providers>        
       </body>
     </html>
   );
