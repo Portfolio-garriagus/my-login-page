@@ -1,24 +1,27 @@
 import { Post, Prisma } from "@prisma/client";
+import { GetStaticPaths } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { TfiCommentAlt, TfiHeart, TfiEye } from "react-icons/tfi";
-import  updatePost from "@/public/java.jpg";
 
 interface Props {
   blogPost: Post;
 }
 
 const Card = ({ blogPost }: Props) => {
+
   return (
     <div className="mb-6 last:mb-0 lg:mb-0 flex flex-col gap-2 group  justify-center items-center">
+
       <Image
         className="mb-4 inline rounded-md drop-shadow transition group-hover:scale-105"
-        src={updatePost}
-        alt={blogPost.title}
-        width={400}
-        height={300}
-      />
+        src={`/signs/${blogPost.imageUrl}.jpg`}
+      alt={blogPost.title}
+      width={400}
+      height={300}
+       />
+
       <h6 className="text-lg text-slate-800 text-2xl font-bold">{blogPost.title}</h6>
       <h1 className="text-slate-500 text-center">{blogPost.content}</h1>
       <h2 className="text-lg text-slate-800 text-2xl font-bold">#{blogPost.description}</h2>

@@ -8,21 +8,18 @@ export interface Props {
 
 const BlogPostContainer = ({ blogPosts }: Props) => {
   return (
-    <div className="mt-10 md:flex justify-center">
+    <div className="mt-20 md:flex md:justify-center">
       <div className="max-w-full flex-row justify-center mb-8 md:mr-2">
-
         <div className="text-center bg-white shadow-md mb-4">
-         
+       
         </div>      
       </div>
       <div className="max-w-full h-full flex relative overflow-y-hidden">
       <div className="h-full w-full m-4 flex flex-wrap items-start justify-start rounded-tl grid-flow-col auto-cols-max gap-4 overflow-y-scroll">
       <div className="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400">    
 
-        {blogPosts.map((post) => (
-                  
-            <Card key={post.id} item={post} />
-          
+        {blogPosts.map((post) => (                  
+            <Card key={post.id} item={post} />          
           ))}     
         </div>
       </div>

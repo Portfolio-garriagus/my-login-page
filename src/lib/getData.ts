@@ -9,7 +9,7 @@ export async function getAllPosts() {
       createdAt: "desc",
     },
   });
-  return data;
+  return data
 }
 
 export async function getPublishedPosts() {
