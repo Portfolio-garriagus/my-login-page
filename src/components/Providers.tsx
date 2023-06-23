@@ -11,9 +11,7 @@ interface Props {
 
 const Providers = ({ children, ...props }: ThemeProviderProps) => {
   return (
-    <NextThemesProvider {...props}>
       <SessionProvider>{children}</SessionProvider>
-    </NextThemesProvider>
   );
 };
 

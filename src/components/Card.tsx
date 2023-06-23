@@ -14,7 +14,7 @@ const Card = ({ blogPost }: Props) => {
   return (
     <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
       <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-        <a href="#" className="flex flex-wrap no-underline hover:no-underline">
+        <div className="flex flex-wrap no-underline hover:no-underline">
           <Image src="https://source.unsplash.com/collection/3106804/800x600" className="h-64 w-full rounded-t pb-6"
             alt={''}
             layout='responsive'
@@ -43,7 +43,7 @@ const Card = ({ blogPost }: Props) => {
           </div>
           <h1 className="text-slate-500 text-center">{blogPost.content}</h1>
           <h2 className="text-lg text-slate-800 text-2xl font-bold">#{blogPost.description}</h2>
-        </a>
+        </div>
       </div>
       <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow-lg p-6">
 
