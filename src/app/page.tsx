@@ -14,7 +14,7 @@ export default async function Home() {
 	const session = await getServerSession(authOptions)
 	return (
 		<main className="mt-40">
-			
+			<BlogPostContainer blogPosts={posts}/>
 		</main >
 	);
 }
