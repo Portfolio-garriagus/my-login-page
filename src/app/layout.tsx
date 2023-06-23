@@ -27,14 +27,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NextAuthProvider>
-        <Providers>
-          <header>
+          <Providers>
+            <header> </header>
             <NavBar />
             <main>{children}</main>
-          </header>
+            <Footer />
           </Providers>
         </NextAuthProvider>
-        <Footer />
       </body>
     </html>
   );
