@@ -4,6 +4,17 @@ const nextConfig = {
   images: {
     domains: ["source.unsplash.com", "i.pravatar.cc"],
   },
+  experimental: {
+    mdxRs: true,
+  },
 };
 
-module.exports = nextConfig;
+const withMDX = require('@next/mdx')({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+    // If you use `MDXProvider`, uncomment the following line.
+    //providerImportSource: "@mdx-js/react",
+  },
+})
+module.exports = withMDX(nextConfig)

@@ -4,21 +4,21 @@ import Form from "@/components/form";
 import { getPublishedPosts } from "@/lib/getData";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
+import HelloWorld from '@/content/hello.mdx' 
+import { notFound } from "next/navigation"
 
 
+interface PostProps {
+  params: {
+    slug: string[]
+  }
+}
 
 
 export default async function Home() {
   const posts = await getPublishedPosts();
 
-  return (
-    <main className="container my-12 mx-auto grid grid-cols-1 gap-2 md:gap-3 lg:gap-4 lg:grid-cols-3 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-4">
-      <div className="flex justify-center">
-        <h1 className="m-2 text-center text-2xl font-bold capitalize bg-gradient-to-r from-red-600 to-purple-500 inline bg-clip-text text-transparent">
-          Crear un Nuevo Post
-        </h1>
-      </div>  
-       <Form ></Form>
-    </main>
+  return (    
+<HelloWorld></HelloWorld>
   );
 }

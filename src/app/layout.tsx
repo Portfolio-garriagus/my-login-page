@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { NextAuthProvider } from "@/components/Providers";
-import { Providers } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
 import SideBar from "@/components/Sidebar";
 
@@ -25,14 +25,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+<body className={`antialiased min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 ${inter.className}`}>
         <NextAuthProvider>
-          <Providers>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <header> </header>
             <NavBar />
             <main>{children}</main>
             <Footer />
-          </Providers>
+          </ThemeProvider>
         </NextAuthProvider>
       </body>
     </html>

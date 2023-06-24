@@ -8,13 +8,18 @@ import { prisma } from "@/lib/prisma";
 import SideBar from "@/components/Sidebar";
 import { getServerSession } from "next-auth/next"
 import { authOptions } from '@/lib/auth';
+import HelloWorld from '@/content/hello.mdx'
 
 export default async function Home() {
 	const posts = await getPublishedPosts();
 	const session = await getServerSession(authOptions)
 	return (
-		<main className="mt-40">
-			<BlogPostContainer blogPosts={posts}/>
+		<main className="mt-40 container px-4 mx-auto max-w-6xl -mt-32 sm:px-6 flex flex-wrap justify-between pt-12">
+			<HelloWorld></HelloWorld>
+			{posts.map((post) => (
+				<Card key={post.id} blogPost={post} />
+			))}
 		</main >
 	);
 }
+

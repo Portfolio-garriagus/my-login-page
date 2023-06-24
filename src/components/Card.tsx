@@ -27,7 +27,7 @@ const Card = ({ blogPost }: Props) => {
           <p className="font-serif text-base px-6 mb-5">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ip Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
           </p>
-          <Link href={`/post/${blogPost.slug}`} className="text-slate-500 hover:text-sky-500 flex items-center justify-center flex-1">
+          <Link href={`/post/${blogPost.title}`} className="text-slate-500 hover:text-sky-500 flex items-center justify-center flex-1">
             <span className="text-base">See More</span>
           </Link>
           <div className="flex items-center justify-between">
@@ -62,10 +62,7 @@ const Card = ({ blogPost }: Props) => {
           </Link>
         </div>
       </div>
-
-
-
-    </div>
+ </div>
   );
 };
 
