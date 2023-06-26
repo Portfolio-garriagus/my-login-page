@@ -6,6 +6,7 @@ import { notFound } from "next/navigation"
 import Image from "next/image";
 import Link from "next/link";
 import { TfiCommentAlt, TfiHeart, TfiEye } from "react-icons/tfi";
+import { Mdx } from "@/components/mdx-components"
 
 interface PostProps {
   params: {
@@ -15,8 +16,8 @@ interface PostProps {
   }
 }
 async function getPostFromParams(params: PostProps["params"]) {
-  const id = params?.id?.join("/")
-  const post = getPostFromId(id)
+  const title = params?.title?.join("/")
+  const post = getPostFromId(title)
   if (!post) {
     null
   }

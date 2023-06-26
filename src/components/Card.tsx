@@ -1,5 +1,6 @@
 import { Post, Prisma } from "@prisma/client";
 import { GetStaticPaths } from "next";
+import { Author } from "next/dist/lib/metadata/types/metadata-types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -21,11 +22,10 @@ const Card = ({ blogPost }: Props) => {
             quality={100}
             width="100"
             height="100" />
-          <p className="w-full text-xs md:text-sm px-6">GETTING STARTED</p>
-          <h6 className="text-lg text-2xl font-bold">{blogPost.title}</h6>
-          <div className="w-full font-bold text-xl px-6">Lorem ipsum dolor sit amet.</div>
+            <div className="w-full font-bold text-xl px-6">{blogPost.title}</div>
+          <p className="w-full text-xs md:text-sm px-6">{blogPost.description}</p>
           <p className="font-serif text-base px-6 mb-5">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ip Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
+          {blogPost.content}
           </p>
           <Link href={`/post/${blogPost.title}`} className="text-slate-500 hover:text-sky-500 flex items-center justify-center flex-1">
             <span className="text-base">See More</span>
@@ -39,7 +39,7 @@ const Card = ({ blogPost }: Props) => {
               height={10}
             />
 
-            <p className="flex justify-end text-xs md:text-sm">1 MIN READ</p>
+            <p className="flex justify-end text-xs md:text-sm">Hecho por {blogPost.authorId} </p>
           </div>
           <h1 className="text-slate-500 text-center">{blogPost.content}</h1>
           <h2 className="text-lg text-slate-800 text-2xl font-bold">#{blogPost.description}</h2>

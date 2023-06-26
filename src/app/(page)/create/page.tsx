@@ -4,7 +4,6 @@ import Form from "@/components/form";
 import { getPublishedPosts } from "@/lib/getData";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
-import HelloWorld from '@/content/hello.mdx' 
 import { notFound } from "next/navigation"
 
 
@@ -19,6 +18,6 @@ export default async function Home() {
   const posts = await getPublishedPosts();
 
   return (    
-<HelloWorld></HelloWorld>
+<h1>sda</h1>
   );
 }
